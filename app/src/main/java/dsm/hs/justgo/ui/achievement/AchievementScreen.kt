@@ -33,6 +33,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dsm.hs.justgo.ui.Leveling
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -43,20 +44,24 @@ fun AchievementScreen(
         modifier = modifier,
         containerColor = Color(0xFFF7F7F7),
         topBar = {
-            CenterAlignedTopAppBar(colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                containerColor = Color.White,
-                titleContentColor = Color.Black,
-                navigationIconContentColor = Color.Black,
-            ), title = {
-                Text("도전과제")
-            }, navigationIcon = {
-                IconButton(onClick = { /*TODO*/ }) {
-                    Icon(
-                        imageVector = Icons.Filled.KeyboardArrowLeft,
-                        contentDescription = "뒤로가기"
-                    )
-                }
-            })
+            CenterAlignedTopAppBar(
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = Color.White,
+                    titleContentColor = Color.Black,
+                    navigationIconContentColor = Color.Black,
+                ),
+                title = {
+                    Text("도전과제")
+                },
+                navigationIcon = {
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            imageVector = Icons.Filled.KeyboardArrowLeft,
+                            contentDescription = "뒤로가기"
+                        )
+                    }
+                },
+            )
         },
     ) { innerPadding ->
         Column(
@@ -67,9 +72,15 @@ fun AchievementScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(160.dp)
                     .background(Color.White)
-            ) {}
+                    .padding(all = 16.dp),
+            ) {
+                Leveling(
+                    modifier = Modifier.fillMaxWidth(),
+                    achievedCount = 4,
+                    totalCount = 5,
+                )
+            }
             ChallengeItemGrid()
         }
     }
@@ -91,8 +102,8 @@ private fun ChallengeItemGrid() {
     LazyVerticalGrid(
         state = scrollState,
         columns = GridCells.Fixed(2),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier.padding(16.dp),
         userScrollEnabled = true,
     ) {

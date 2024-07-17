@@ -1,12 +1,8 @@
-package dsm.hs.justgo.ui.register
+package dsm.hs.justgo.ui.destinationdetails
 
 import android.app.ActionBar.LayoutParams
-import android.os.Handler
 import android.view.ViewGroup
-import android.webkit.JavascriptInterface
 import android.webkit.WebChromeClient
-import android.webkit.WebResourceError
-import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,6 +14,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -27,9 +24,9 @@ import dsm.hs.justgo.core.network.WEB_URL
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TermsScreen(
+fun DestinationDetailsScreen(
     modifier: Modifier = Modifier,
-    appendUrl: String = "/term",
+    appendUrl: String = "/destination/1",
 ) {
     Scaffold(
         modifier = modifier,
@@ -40,7 +37,9 @@ fun TermsScreen(
                     titleContentColor = Color.Black,
                     navigationIconContentColor = Color.Black,
                 ),
-                title = { /*TODO*/ },
+                title = {
+                    Text(text = "시작하기")
+                },
                 navigationIcon = {
                     IconButton(
                         onClick = { /*TODO*/ },
@@ -65,15 +64,7 @@ fun TermsScreen(
                         LayoutParams.MATCH_PARENT,
                     )
                     settings.javaScriptEnabled = true
-                    webViewClient = object : WebViewClient() {
-                        override fun onReceivedError(
-                            view: WebView?,
-                            request: WebResourceRequest?,
-                            error: WebResourceError?
-                        ) {
-                            println(error?.description)
-                        }
-                    }
+                    webViewClient = WebViewClient()
 
                     settings.loadWithOverviewMode = true
                     settings.useWideViewPort = true
@@ -82,34 +73,11 @@ fun TermsScreen(
                     webChromeClient = object : WebChromeClient() {
                         override fun onCloseWindow(window: WebView?) {}
                     }
-                    addJavascriptInterface(
-                        StartTripScreenJsInterface(
-                            webView = this,
-                        ),
-                        "hi",
-                    )
                 }
             },
             update = {
                 it.loadUrl(WEB_URL + appendUrl)
             },
         )
-    }
-}
-
-class StartTripScreenJsInterface(
-    val webView: WebView,
-) {
-    val handler = Handler()
-
-    @JavascriptInterface
-    fun postMessage(value: String) {
-        handler.post {
-            try {
-                println(value)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
     }
 }

@@ -11,7 +11,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
-import dsm.hs.justgo.core.WEB_URL
+import dsm.hs.justgo.core.network.WEB_URL
 
 @Composable
 fun AuthScreen(
