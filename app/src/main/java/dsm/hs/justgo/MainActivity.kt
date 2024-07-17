@@ -10,10 +10,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val viewModel = MainViewModel()
             JustGoTheme {
-                // MainScreen(viewModel)
-                HomeScreen()
+                JustGoApp()
             }
         }
     }
