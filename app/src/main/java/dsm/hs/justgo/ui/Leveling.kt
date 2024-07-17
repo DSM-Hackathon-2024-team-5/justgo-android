@@ -22,6 +22,7 @@ import dsm.hs.justgo.R
 import dsm.hs.justgo.ui.theme.Label
 import dsm.hs.justgo.ui.theme.Main
 import dsm.hs.justgo.ui.theme.MainDarken
+import dsm.hs.justgo.ui.theme.MainLighten
 import dsm.hs.justgo.ui.theme.OnSurface
 import dsm.hs.justgo.ui.theme.Surface
 import dsm.hs.justgo.ui.theme.Title
@@ -90,7 +91,7 @@ fun Leveling(
                             color = if (index <= achievedCount) {
                                 MainDarken
                             } else {
-                                Main
+                                MainLighten
                             },
                             shape = RoundedCornerShape(10.dp),
                         ),
